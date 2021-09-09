@@ -6,7 +6,7 @@
         const data = await response.json();
         let htmlString = '<ul>';
         for (let file of data) {
-          if (file.name.substring(file.name.search('.')) === '.mp4') {
+          if (file.name.split('.').pop() == 'mp4') {
             htmlString += `<video width="320" height="240" controls>
               <source src="${file.path}" type="video/mp4">
               </video>`;
