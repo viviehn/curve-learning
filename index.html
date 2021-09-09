@@ -6,7 +6,11 @@
         const data = await response.json();
         let htmlString = '<ul>';
         for (let file of data) {
-          htmlString += `<li><a href="${file.path}">${file.name}</a></li>`;
+          if file.name.substring(file.name.search('.')) === '.mp4' {
+            htmlString += `<video width="320" height="240" controls>
+              <source src="${file.path}" type="video/mp4">
+              </video>`;
+          }
         }
         htmlString += '</ul>';
         document.getElementsByTagName('body')[0].innerHTML = htmlString;
