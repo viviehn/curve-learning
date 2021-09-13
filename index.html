@@ -3,7 +3,8 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     <script type="text/javascript" src="directory.json"></script>
   <body>
-    <div class="container-fluid" id="main"></div>
+    <div class="container-fluid" id="main">
+    </div>
     <script>
       function readTextFile(file)
       {
@@ -38,16 +39,22 @@
         }
       }
 
-      var htmlString = '';
+var htmlString = '<div class="row"><div class="d-none d-xl-block col-xl-2 bd-toc">';
+      htmlString += `<ul class="section-nav">`;
       var directories = JSON.parse(readTextFile('directory.json'));
+      for (let entry of directories) {
+        htmlString += `<li class="toc-entry toc-h1"><a href="#${entry.date}">${entry.date}</a></li>`
+      }
+      htmlString += "</ul></div>";
+      htmlString += '<div class="col-xl-10">';
       (async () => {
       for (let entry of directories) {
-        htmlString += `<h1>${entry.date}</h1>`;
+        htmlString += `<h1 id=${entry.date}>${entry.date}</h1>`;
         htmlString += '<div class="row">';
         htmlString += `<div class="col-sm"><h3>${entry.exp}</h3>`;
         htmlString += `<p>${entry.desc}</p></div>`;
-        htmlString += `<div class="col-sm"><a href="#" class="btn btn-primary btn-lg active" role="button" aria-pressed="true" onclick="playVid('${entry.date}-${entry.dir}');">Play Videos</a>`;
-        htmlString += `<a href="#" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true" onclick="pauseVid('${entry.date}-${entry.dir}');">Pause Videos</a></div>`;
+        htmlString += `<div class="col-sm"><a class="btn btn-primary btn-lg active" role="button" aria-pressed="true" onclick="playVid('${entry.date}-${entry.dir}');">Play Videos</a>`;
+        htmlString += `<a class="btn btn-secondary btn-lg active" role="button" aria-pressed="true" onclick="pauseVid('${entry.date}-${entry.dir}');">Pause Videos</a></div>`;
         htmlString += "</div>";
 
 
@@ -62,10 +69,12 @@
           }
         }
         htmlString += '</ul>';
-        document.getElementById("main").innerHTML += htmlString;
 
       }
+      htmlString += '</div>'
+      htmlString += '</div>'
 
+      document.getElementById("main").innerHTML += htmlString;
       })()
 
 
