@@ -1,4 +1,12 @@
 [
  {"date": "20210908",
-  "dir": "pretrain_clean_line_drawings"}
+  "dir": "pretrain_clean_line_drawings",
+  "exp": "Pretrained on clean line drawings",
+  "desc": "No finetuning"
+ },
+ {"date": "20210913",
+  "dir": "pretrain_clean_line_drawings",
+  "exp": "Pretrained on clean line drawings",
+  "desc": "No finetuning"
+ }
 ]

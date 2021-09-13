@@ -1,8 +1,9 @@
 <html>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-  <body>
     <script type="text/javascript" src="directory.json"></script>
+  <body>
+    <div class="container-fluid" id="main"></div>
     <script>
       function readTextFile(file)
       {
@@ -25,6 +26,7 @@
       function playVid(videoClass) {
         var videos = document.getElementsByClassName(videoClass);
         for (let vid of videos) {
+          vid.loop = true;
           vid.play();
         }
       }
@@ -36,31 +38,39 @@
         }
       }
 
-      var directories = JSON.parse(readTextFile('directory.json'));
       var htmlString = '';
-      for (let entry of directories) {
-        htmlString += `<h1>${entry.date}</h1>`
-        htmlString += `<a href="#" class="btn btn-primary btn-lg active" role="button" aria-pressed="true" onclick="playVid(${entry.date}-${entry.dir})">Primary link</a>`
-
+      var directories = JSON.parse(readTextFile('directory.json'));
       (async () => {
-        const response = await fetch(`https://api.github.com/repos/viviehn/curve-learning/contents/${entry.date}/${entry.dir}`);
-        const data = await response.json();
-        htmlString += '<ul>';
+      for (let entry of directories) {
+        htmlString += `<h1>${entry.date}</h1>`;
+        htmlString += '<div class="row">';
+        htmlString += `<div class="col-sm"><h3>${entry.exp}</h3>`;
+        htmlString += `<p>${entry.desc}</p></div>`;
+        htmlString += `<div class="col-sm"><a href="#" class="btn btn-primary btn-lg active" role="button" aria-pressed="true" onclick="playVid('${entry.date}-${entry.dir}');">Play Videos</a>`;
+        htmlString += `<a href="#" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true" onclick="pauseVid('${entry.date}-${entry.dir}');">Pause Videos</a></div>`;
+        htmlString += "</div>";
+
+
+        var response = await fetch(`https://api.github.com/repos/viviehn/curve-learning/contents/${entry.date}/${entry.dir}`);
+        var data = await response.json();
+        htmlString += `<ul id="${entry.date}-${entry.dir}">`;
         for (let file of data) {
           if (file.name.split('.').pop() == 'mp4') {
-            htmlString += `<video width="320" height="240" class="${entry.date}-${entry.dir}">
+            htmlString += `<video width="320" height="240" class="${entry.date}-${entry.dir}" style="border:1px solid #000;">
               <source src="${file.path}" type="video/mp4">
               </video>`;
           }
         }
         htmlString += '</ul>';
-        document.getElementsByTagName('body')[0].innerHTML += htmlString;
-      })()
+        document.getElementById("main").innerHTML += htmlString;
 
       }
+
+      })()
+
 
 
     </script>
 
-  <body>
+  </body>
 </html>
