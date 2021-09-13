@@ -1,20 +1,66 @@
 <html>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
   <body>
+    <script type="text/javascript" src="directory.json"></script>
     <script>
+      function readTextFile(file)
+      {
+          var rawFile = new XMLHttpRequest();
+          var allText = null;
+          rawFile.open("GET", file, false);
+          rawFile.onreadystatechange = function ()
+          {
+              if(rawFile.readyState === 4)
+              {
+                  if(rawFile.status === 200 || rawFile.status == 0)
+                  {
+                      allText = rawFile.responseText;
+                  }
+              }
+          }
+          rawFile.send(null);
+          return allText;
+      }
+      function playVid(videoClass) {
+        var videos = document.getElementsByClassName(videoClass);
+        for (let vid of videos) {
+          vid.play();
+        }
+      }
+
+      function pauseVid(videoClass) {
+        var videos = document.getElementsByClassName(videoClass);
+        for (let vid of videos) {
+          vid.pause();
+        }
+      }
+
+      var directories = JSON.parse(readTextFile('directory.json'));
+      var htmlString = '';
+      for (let entry of directories) {
+        htmlString += `<h1>${entry.date}</h1>`
+        htmlString += `<a href="#" class="btn btn-primary btn-lg active" role="button" aria-pressed="true" onclick="playVid(${entry.date}-${entry.dir})">Primary link</a>`
+
       (async () => {
-        const response = await fetch('https://api.github.com/repos/viviehn/curve-learning/contents/');
+        const response = await fetch(`https://api.github.com/repos/viviehn/curve-learning/contents/${entry.date}/${entry.dir}`);
         const data = await response.json();
-        let htmlString = '<ul>';
+        htmlString += '<ul>';
         for (let file of data) {
           if (file.name.split('.').pop() == 'mp4') {
-            htmlString += `<video width="320" height="240" controls>
+            htmlString += `<video width="320" height="240" class="${entry.date}-${entry.dir}">
               <source src="${file.path}" type="video/mp4">
               </video>`;
           }
         }
         htmlString += '</ul>';
-        document.getElementsByTagName('body')[0].innerHTML = htmlString;
+        document.getElementsByTagName('body')[0].innerHTML += htmlString;
       })()
+
+      }
+
+
     </script>
+
   <body>
 </html>
