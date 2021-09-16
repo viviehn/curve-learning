@@ -7,6 +7,6 @@
  {"date": "20210913",
   "dir": "pretrain_clean_line_drawings",
   "exp": "Pretrained on clean line drawings",
-  "desc": "No finetuning"
- }
+  "desc": "No finetuning, use previous state (state_dependent=True)"
+ },
 ]
