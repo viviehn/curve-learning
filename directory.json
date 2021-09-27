@@ -1,5 +1,10 @@
 [
  {"date": "20210927",
+  "dir": "finetune_junction4_bidir",
+  "exp": "Pretrained on clean line drawings, finetuned with 'junction loss', bidirectional",
+  "desc": "After finishing a first half of a line, force the pen back to the state at the start of the first half (with updated canvas)"
+ },
+ {"date": "20210927",
   "dir": "pretrain_clean_line_drawings_bidir",
   "exp": "Pretrained on clean line drawings, bidirectional",
   "desc": "After finishing a first half of a line, force the pen back to the state at the start of the first half (with updated canvas)"
