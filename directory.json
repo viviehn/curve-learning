@@ -1,23 +1,8 @@
 [
- {"date": "20210928",
-  "dir": "finetune_junction_1_bidir",
-  "exp": "Pretrained on clean line drawings, finetuned with 'junction loss', bidirectional",
-  "desc": "After finishing a first half of a line, force the pen back to the state at the start of the first half (with updated canvas)"
- },
  {"date": "20210927",
   "dir": "pretrain_clean_line_drawings_bidir",
   "exp": "Pretrained on clean line drawings, bidirectional",
   "desc": "After finishing a first half of a line, force the pen back to the state at the start of the first half (with updated canvas)"
- },
- {"date": "20210925",
-  "dir": "pretrain_clean_line_drawings_bidir",
-  "exp": "Pretrained on clean line drawings, bidirectional",
-  "desc": "After finishing a first half of a line, force the pen back to the state at the start of the first half (with updated canvas)"
- },
- {"date": "20210916",
-  "dir": "pretrain_clean_line_drawings",
-  "exp": "Pretrained on clean line drawings",
-  "desc": "No finetuning, use previous state (state_dependent=True)"
  },
  {"date": "20210908",
   "dir": "pretrain_clean_line_drawings",
