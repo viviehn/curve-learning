@@ -6,6 +6,80 @@
     <script type="text/javascript" src="directory.json"></script>
   <body>
     <div class="container-fluid" style="padding-top:20px" id="main">
+      <h2>2021-11-03</h2>
+        <p>Compare to final image of all lines</p>
+      <div class="row">
+        <div class="col">
+          <video width="100%" style="border:1px solid #000;" controls>
+              <source src="20211103/compare_to_final.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="col">
+          <img width="100%" src="20211103/compare_to_final0020.png">
+        </div>
+        <div class="col">
+          <img width="100%" src="20211103/compare_to_final0040.png">
+        </div>
+        <div class="col">
+          <img width="100%" src="20211103/compare_to_final0060.png">
+        </div>
+      </div>
+        <p>Compare to prev image at each iter</p>
+      <div class="row">
+        <div class="col">
+          <video width="100%" style="border:1px solid #000;" controls>
+              <source src="20211103/compare_to_prev.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="col">
+          <img width="100%" src="20211103/compare_to_prev0020.png">
+        </div>
+        <div class="col">
+          <img width="100%" src="20211103/compare_to_prev0040.png">
+        </div>
+        <div class="col">
+          <img width="100%" src="20211103/compare_to_prev0060.png">
+        </div>
+      </div>
+        <p>Compare to prev image at each iter, merge added stroke to an existing one if possible</p>
+      <div class="row">
+        <div class="col">
+          <video width="100%" style="border:1px solid #000;" controls>
+              <source src="20211103/compare_to_prev_merge.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="col">
+          <img width="100%" src="20211103/compare_to_prev_merge0020.png">
+        </div>
+        <div class="col">
+          <img width="100%" src="20211103/compare_to_prev_merge0040.png">
+        </div>
+        <div class="col">
+          <img width="100%" src="20211103/compare_to_prev_merge0060.png">
+        </div>
+      </div>
+
+      <p>Other things</p>
+      <div class="row">
+        <div class="col">
+          <img width="100%" src="20211103/toomanypts.png">
+        </div>
+        <div class="col">
+          <img width="100%" src="20211103/toomanycurves.png">
+        </div>
+        <div class="col">
+          <img width="100%" src="20211103/wiggle.png">
+        </div>
+        <div class="col">
+          <img width="100%" src="20211103/5pts.png">
+        </div>
+      </div>
+      <p>Some general thoughts/comments: </p>
+      <p>Most(basically all) other simplification works start with all the curves and remove them, and don't modify the curves (either points or topology). Building up the drawing allows us to potentially do all of those</p>
+      <p>Currently working with very very brute force, iterative, and greedy methods. Currently focus on getting good (simple, good topology, few points per curve, etc) drawings, then later we can think about acceleration/optimization/learning when to stop/style?</p>
+      <br>
+      <hr>
+      <h2>2021-10-27</h2>
       <div class="row">
         <div class="col">
           <p>Car iterative</p>
